@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "navigator, is a react component that navigator, build for mobile web app",
   "keywords": [
-    "react",
-    "mobile",
     "navigator",
-    "tab"
+    "tab header",
+    "react",
+    "mobile"
   ],
   "files": [
     "navigator",
