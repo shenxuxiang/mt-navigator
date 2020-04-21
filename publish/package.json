@@ -1,0 +1,33 @@
+{
+  "name": "mt-navigator",
+  "version": "1.0.0",
+  "description": "navigator, is a react component that navigator, build for mobile web app",
+  "keywords": [
+    "react",
+    "mobile",
+    "navigator",
+    "tab"
+  ],
+  "files": [
+    "navigator",
+    "LICENSE",
+    "index.js",
+    "package.json",
+    "README.md"
+  ],
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/shenxuxiang/mt-navigator/issure"
+  },
+  "author": "https://github.com/shenxuxiang/mt-navigator",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
+  
