@@ -12,42 +12,42 @@ const source = [
   {
     url: img1,
     text: '精选',
-    label: 1,
+    label: '11',
   },
   {
     url: img2,
     text: '良品铺子',
-    label: 2,
+    label: '22',
   },
   {
     url: img3,
     text: '乳饮酒水',
-    label: 3,
+    label: '33',
   },
   {
     url: img4,
     text: '粮油米面',
-    label: 4,
+    label: '44',
   },
   {
     url: img5,
     text: '纸品家清',
-    label: 5,
+    label: '55',
   },
   {
     url: img6,
     text: '休闲食品',
-    label: 6,
+    label: '66',
   },
   {
     url: img1,
     text: '时令生鲜',
-    label: 7,
+    label: '77',
   },
   {
     url: img2,
     text: '美容个理',
-    label: 8,
+    label: '88',
   },
 ];
 
@@ -55,6 +55,7 @@ export default class App extends PureComponent {
   constructor() {
     super();
     this.state = {
+      navSource: [],
       indicator: 0,
       key: 0,
       fixed: false,
@@ -63,6 +64,10 @@ export default class App extends PureComponent {
   }
 
   componentDidMount() {
+    setTimeout(() => {
+      this.setState({ navSource: source });
+    }, 0)
+    
     this.navOffsetTop = document.querySelector('.mt-navigator').offsetTop;
     window.addEventListener('scroll', this.handleScroll, false);
   }
@@ -93,12 +98,16 @@ export default class App extends PureComponent {
           className={`nav-header${this.state.fixed ? ' fixed' : ''}`}
         >
           {
-            source.map((item) =>
-              <div 
+            this.state.navSource.map((item) =>
+              <div
                 key={item.label}
                 className="nav-list-item"
-                onClick={() => {
-                  console.log(item.label, 'index')
+                onTouchMove={() => this.isTouchMove = true}
+                onTouchEnd={() => {
+                  if (this.isTouchMove) {
+                    return this.isTouchMove = false;
+                  }
+                  this.setState({ indicator: item.label })
                 }}
               >
                 <img src={item.url} className="nav-list-item-img" />
@@ -107,14 +116,14 @@ export default class App extends PureComponent {
             )
           }
         </Navigator>
-        <div style={{ background: '#fff', height: 200 }}></div>
-        <div style={{ background: '#ccc', height: 200 }}>{`${this.state.fixed}`}</div>
-        <div style={{ background: '#f80', height: 200 }}></div>
-        <div style={{ background: '#fff', height: 200 }}></div>
-        <div style={{ background: '#f90', height: 200 }}></div>
-        <div style={{ background: '#f80', height: 200 }}></div>
-        <div style={{ background: '#fff', height: 200 }}></div>
-        <div style={{ background: '#f90', height: 200 }}></div>
+        <div style={{ background: '#fff', height: 200 }} />
+        <div style={{ background: '#ccc', height: 200 }}>{this.state.indicator}</div>
+        <div style={{ background: '#f80', height: 200 }} />
+        <div style={{ background: '#fff', height: 200 }} />
+        <div style={{ background: '#f90', height: 200 }} />
+        <div style={{ background: '#f80', height: 200 }} />
+        <div style={{ background: '#fff', height: 200 }} />
+        <div style={{ background: '#f90', height: 200 }} />
       </div>
     );
   }

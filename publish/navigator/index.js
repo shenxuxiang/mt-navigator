@@ -71,7 +71,7 @@ function navigator(props) {
         offsetX = -MAX_OFFSET;
       }
       if (isClick) {
-        let {target} = event;
+        let { target } = event;
         while (target && !target.classList.contains('mt-navigator-wrapper-item')) {
           target = target.parentNode;
         }
@@ -122,7 +122,7 @@ function navigator(props) {
       wrapperRef.current.removeEventListener('touchmove', handleTouchMove, false);
       wrapperRef.current.removeEventListener('touchend', handleTouchEnd, false);
     };
-  }, []);
+  }, [children.length]);
 
   return (
     <div

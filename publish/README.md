@@ -66,13 +66,19 @@ export default class App extends PureComponent {
   constructor() {
     super();
     this.state = {
+      navSource: [],
       indicator: 0,
+      key: 0,
       fixed: false,
     };
     this.fixed = false;
   }
 
   componentDidMount() {
+    setTimeout(() => {
+      this.setState({ navSource: source });
+    }, 0)
+    
     this.navOffsetTop = document.querySelector('.mt-navigator').offsetTop;
     window.addEventListener('scroll', this.handleScroll, false);
   }
@@ -97,17 +103,22 @@ export default class App extends PureComponent {
     return (
       <div className="container">
         <Navigator
+          key={`key-a-${this.state.key}`}
           tabIndex={1}
           background="#f90"
           className={`nav-header${this.state.fixed ? ' fixed' : ''}`}
         >
           {
-            source.map((item) =>
-              <div 
+            this.state.navSource.map((item) =>
+              <div
                 key={item.label}
                 className="nav-list-item"
-                onClick={() => {
-                  console.log(item.label, 'index')
+                onTouchMove={() => this.isTouchMove = true}
+                onTouchEnd={() => {
+                  if (this.isTouchMove) {
+                    return this.isTouchMove = false;
+                  }
+                  this.setState({ indicator: item.label })
                 }}
               >
                 <img src={item.url} className="nav-list-item-img" />
@@ -116,14 +127,14 @@ export default class App extends PureComponent {
             )
           }
         </Navigator>
-        <div style={{ background: '#fff', height: 200 }}></div>
-        <div style={{ background: '#ccc', height: 200 }}>{`${this.state.fixed}`}</div>
-        <div style={{ background: '#f80', height: 200 }}></div>
-        <div style={{ background: '#fff', height: 200 }}></div>
-        <div style={{ background: '#f90', height: 200 }}></div>
-        <div style={{ background: '#f80', height: 200 }}></div>
-        <div style={{ background: '#fff', height: 200 }}></div>
-        <div style={{ background: '#f90', height: 200 }}></div>
+        <div style={{ background: '#fff', height: 200 }} />
+        <div style={{ background: '#ccc', height: 200 }}>{this.state.indicator}</div>
+        <div style={{ background: '#f80', height: 200 }} />
+        <div style={{ background: '#fff', height: 200 }} />
+        <div style={{ background: '#f90', height: 200 }} />
+        <div style={{ background: '#f80', height: 200 }} />
+        <div style={{ background: '#fff', height: 200 }} />
+        <div style={{ background: '#f90', height: 200 }} />
       </div>
     );
   }
